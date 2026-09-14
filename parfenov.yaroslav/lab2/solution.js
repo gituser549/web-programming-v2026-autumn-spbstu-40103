@@ -8,67 +8,67 @@ export class ZodiacSign {
   static getAllZodiacSigns(year) {
     return [
       new ZodiacSign(
-        'Aquarius',
+        'Водолей',
         Date.parse(`${year}-01-20`),
         Date.parse(`${year}-02-18`),
       ),
       new ZodiacSign(
-        'Pisces',
+        'Рыбы',
         Date.parse(`${year}-02-19`),
         Date.parse(`${year}-03-20`),
       ),
       new ZodiacSign(
-        'Aries',
+        'Овен',
         Date.parse(`${year}-03-21`),
         Date.parse(`${year}-04-19`),
       ),
       new ZodiacSign(
-        'Taurus',
+        'Телец',
         Date.parse(`${year}-04-20`),
         Date.parse(`${year}-05-20`),
       ),
       new ZodiacSign(
-        'Gemini',
+        'Близнецы',
         Date.parse(`${year}-05-21`),
         Date.parse(`${year}-06-20`),
       ),
       new ZodiacSign(
-        'Cancer',
+        'Рак',
         Date.parse(`${year}-06-21`),
         Date.parse(`${year}-07-22`),
       ),
       new ZodiacSign(
-        'Leo',
+        'Лев',
         Date.parse(`${year}-07-23`),
         Date.parse(`${year}-08-22`),
       ),
       new ZodiacSign(
-        'Virgo',
+        'Дева',
         Date.parse(`${year}-08-23`),
         Date.parse(`${year}-09-22`),
       ),
       new ZodiacSign(
-        'Libra',
+        'Весы',
         Date.parse(`${year}-09-23`),
         Date.parse(`${year}-10-22`),
       ),
       new ZodiacSign(
-        'Scorpio',
+        'Скорпион',
         Date.parse(`${year}-10-23`),
         Date.parse(`${year}-11-21`),
       ),
       new ZodiacSign(
-        'Sagittarius',
+        'Стрелец',
         Date.parse(`${year}-11-22`),
         Date.parse(`${year}-12-21`),
       ),
       new ZodiacSign(
-        'Capricorn',
+        'Козерог',
         Date.parse(`${year}-12-22`),
         Date.parse(`${year}-12-31`),
       ),
       new ZodiacSign(
-        'Capricorn',
+        'Козерог',
         Date.parse(`${year}-01-01`),
         Date.parse(`${year}-01-19`),
       ),
@@ -86,7 +86,7 @@ export function showZodiacSign(dateString) {
       allZodiacSigns[i].leftDateLimit <= date &&
       date <= allZodiacSigns[i].rightDateLimit
     ) {
-      return `Your zodiac sign is ${allZodiacSigns[i].name}`;
+      return allZodiacSigns[i].name;
     }
   }
 }
