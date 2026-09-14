@@ -1,5 +1,5 @@
 export function sortByFrequency(arr) {
-  let freqByElem = new Map();
+  const freqByElem = new Map();
 
   for (let i = 0; i < arr.length; i++) {
     if (freqByElem.has(arr[i])) {
@@ -9,8 +9,8 @@ export function sortByFrequency(arr) {
     }
   }
 
-  let keys = Array.from(freqByElem.keys());
-  let freqElemPairs = [keys.length]
+  const keys = Array.from(freqByElem.keys());
+  const freqElemPairs = [keys.length]
   for (let i = 0; i < keys.length; i++) {
     freqElemPairs[i] = [freqByElem.get(keys[i]), keys[i]];
   }
@@ -27,7 +27,7 @@ export function sortByFrequency(arr) {
     }
   );
 
-  let sortedArr = new Array(arr.length);
+  const sortedArr = new Array(arr.length);
   let slide = 0;
   for (let i = 0; i < freqElemPairs.length; i++) {
     sortedArr.fill(freqElemPairs[i][1], slide, slide + freqElemPairs[i][0]);
