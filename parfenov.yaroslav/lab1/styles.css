@@ -3,6 +3,8 @@ p {
   width: 300px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 3;
   overflow: hidden;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
 }
