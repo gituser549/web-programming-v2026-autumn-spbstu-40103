@@ -86,7 +86,7 @@ export function showZodiacSign(dateString) {
       allZodiacSigns[i].leftDateLimit <= date &&
       date <= allZodiacSigns[i].rightDateLimit
     ) {
-      return ('Your zodiac sign is:' + allZodiacSigns[i].name);
+      return `Your zodiac sign is ${allZodiacSigns[i].name}`;
     }
   }
 }
