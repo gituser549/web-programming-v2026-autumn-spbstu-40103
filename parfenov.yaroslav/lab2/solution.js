@@ -76,7 +76,7 @@ export class ZodiacSign {
   }
 }
 
-export function showZodiacSign(dateString) {
+export function getZodiacSign(dateString) {
   const date = new Date(dateString);
   const year = date.getFullYear();
 
