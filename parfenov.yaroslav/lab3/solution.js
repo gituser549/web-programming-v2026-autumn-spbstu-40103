@@ -10,22 +10,20 @@ export function sortByFrequency(arr) {
   }
 
   const keys = Array.from(freqByElem.keys());
-  const freqElemPairs = [keys.length]
+  const freqElemPairs = [keys.length];
   for (let i = 0; i < keys.length; i++) {
     freqElemPairs[i] = [freqByElem.get(keys[i]), keys[i]];
   }
 
-  freqElemPairs.sort(
-    (a, b) => {
-      if (a[0] < b[0]) {
-        return -1;
-      } else if (a[0] > b[0]) {
-        return 1;
-      }
-
-      return 0;
+  freqElemPairs.sort((a, b) => {
+    if (a[0] < b[0]) {
+      return -1;
+    } else if (a[0] > b[0]) {
+      return 1;
     }
-  );
+
+    return 0;
+  });
 
   const sortedArr = new Array(arr.length);
   let slide = 0;
