@@ -10,15 +10,15 @@ export class Game {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         try {
-          this.platforms.push(platform)
-          this.platforms = [...new Set(this.platforms)]
+          this.platforms.push(platform);
+          this.platforms = [...new Set(this.platforms)];
 
-          resolve()
+          resolve();
         } catch (error) {
-          reject(error)
+          reject(error);
         }
-      }, 500)
-    })
+      }, 500);
+    });
   }
 
   removePlatform(platform) {
@@ -32,13 +32,12 @@ export class Game {
 
           this.platforms.splice(index, 1);
 
-          resolve()
+          resolve();
         } catch (error) {
-          reject(error)
+          reject(error);
         }
-      })
-    })
-
+      });
+    });
   }
 
   platformCount() {
@@ -51,9 +50,12 @@ export function groupGamesByReleaseYear(games) {
 
   for (const game of games) {
     if (gameByReleaseYear.has(game.releaseYear)) {
-      gameByReleaseYear.set(game.releaseYear, gameByReleaseYear.get(game.releaseYear).add(game));
+      gameByReleaseYear.set(
+        game.releaseYear,
+        gameByReleaseYear.get(game.releaseYear).add(game),
+      );
     } else {
-      gameByReleaseYear.set(game.releaseYear, new Set(game))
+      gameByReleaseYear.set(game.releaseYear, new Set(game));
     }
   }
 
@@ -87,9 +89,12 @@ export function groupGamesByPlatformCount(games) {
 
   for (const game of games) {
     if (gamesByPlatformCount.has(game.platforms.length)) {
-      gamesByPlatformCount.set(game.platforms.length, gamesByPlatformCount.get(game.platforms.length).add(game));
+      gamesByPlatformCount.set(
+        game.platforms.length,
+        gamesByPlatformCount.get(game.platforms.length).add(game),
+      );
     } else {
-      gamesByPlatformCount.set(game.platforms.length, new Set(game))
+      gamesByPlatformCount.set(game.platforms.length, new Set(game));
     }
   }
 
@@ -112,16 +117,22 @@ export function addGame(games, newGame) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
-        if (!games.map(game => { return game.title } ).includes(newGame.title)) {
+        if (
+          !games
+            .map((game) => {
+              return game.title;
+            })
+            .includes(newGame.title)
+        ) {
           games.push(newGame);
         }
 
-        resolve()
+        resolve();
       } catch (error) {
-        reject(error)
+        reject(error);
       }
-      }, 500)
-  })
+    }, 500);
+  });
 }
 
 export function removeGame(games, gameTitle) {
@@ -132,7 +143,7 @@ export function removeGame(games, gameTitle) {
           if (game.title === gameTitle) {
             games.splice(games.indexOf(game), 1);
 
-            break
+            break;
           }
         }
 
