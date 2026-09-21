@@ -24,7 +24,7 @@ main {
   min-height: 0;
 
   margin-top: auto;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 input {
@@ -81,6 +81,8 @@ ul {
 }
 
 .header-card {
+  margin-top: 5px;
+
   color: darkolivegreen;
   font-family: Arial, sans-serif;
   font-size: 24px;
