@@ -29,6 +29,12 @@ function ChatMessages({messages}) {
     localStorage.setItem(MESSAGES_KEY, JSON.stringify(messages));
   }, [messages]);
 
+  if (!messages.length) {
+    return <div className="message-invitation">
+      Напишите первое сообщение!
+    </div>
+  }
+
   return (
     <ul className="chat-messages">
       {
