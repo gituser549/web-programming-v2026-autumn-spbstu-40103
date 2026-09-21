@@ -5,3 +5,73 @@
 body {
   margin: 0;
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chat-message-form {
+  display: flex;
+  column-gap: 2px;
+
+  font-family: Arial, sans-serif;
+}
+
+input {
+  border: gray solid 1px;
+  border-radius: 5px;
+}
+
+input:hover {
+  background-color: lightgray;
+}
+
+button {
+  border: gray solid 1px;
+  background-color: darkolivegreen;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: lightgray;
+}
+
+ul {
+  list-style: none;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  max-width: 220px;
+}
+
+.message {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-color: lightgrey;
+
+  overflow-wrap: anywhere;
+}
+
+.message-time {
+  color: gray;
+  font-size: 11px;
+}
+
+.message-author {
+  color: darkolivegreen;
+}
+
+.header-card {
+  color: darkolivegreen;
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+}
