@@ -1,4 +1,6 @@
 // Экспортируйте класс и функции коллекций с именами из контракта вашего варианта.
+const FIRST_GAME_RELEASE_YEAR = 1952;
+
 export class Game {
   constructor(title, platforms, releaseYear) {
     this.title = title;
@@ -40,7 +42,7 @@ export class Game {
     });
   }
 
-  platformCount() {
+  get platformCount() {
     return this.platforms.length;
   }
 }
@@ -55,7 +57,7 @@ export function groupGamesByReleaseYear(games) {
         gameByReleaseYear.get(game.releaseYear).add(game),
       );
     } else {
-      gameByReleaseYear.set(game.releaseYear, new Set(game));
+      gameByReleaseYear.set(game.releaseYear, new Set([game]));
     }
   }
 
@@ -72,7 +74,7 @@ export function getUniquePlatforms(games) {
   return uniquePlatforms.values().toArray();
 }
 
-export function getAllSupportedGames(games, platform) {
+export function findGamesByPlatform(games, platform) {
   const uniqueGames = new Set();
 
   for (const game of games) {
@@ -94,14 +96,14 @@ export function groupGamesByPlatformCount(games) {
         gamesByPlatformCount.get(game.platforms.length).add(game),
       );
     } else {
-      gamesByPlatformCount.set(game.platforms.length, new Set(game));
+      gamesByPlatformCount.set(game.platforms.length, new Set([game]));
     }
   }
 
   return gamesByPlatformCount;
 }
 
-export function getGamesReleasedAfterYear(games, limitYear) {
+export function findGamesReleasedAfter(games, limitYear) {
   const gamesReleasedAfterYear = new Set();
 
   for (const game of games) {
@@ -118,6 +120,8 @@ export function addGame(games, newGame) {
     setTimeout(() => {
       try {
         if (
+          newGame.title.trim().length > 0 &&
+          +newGame.releaseYear >= FIRST_GAME_RELEASE_YEAR &&
           !games
             .map((game) => {
               return game.title;

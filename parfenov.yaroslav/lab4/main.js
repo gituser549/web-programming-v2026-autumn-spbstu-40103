@@ -18,8 +18,7 @@ function loadGames() {
 
 // Реализуйте асинхронную логику UI и синхронизацию с localStorage.
 const form = document.querySelector('form[data-testid="entity-form"]');
-const buttonAddGame = document.querySelector('#addGame');
-const buttonRemoveGame = document.querySelector('#removeGame');
+const formGamesManipulation = document.querySelector('#gamesManipulation');
 const buttonAddPlatform = document.querySelector('#addPlatform');
 const buttonRemovePlatform = document.querySelector('#removePlatform');
 
@@ -33,12 +32,29 @@ function renderGameCards() {
   for (const game of games) {
     const note = document.createElement('article');
     note.textContent = `${game.title}; ${game.releaseYear}; ${game.platforms}`;
+    note.setAttribute('data-testid', 'entity-card');
+
+    const button = document.createElement('button');
+    button.setAttribute('data-testid', 'delete-entity');
+    button.textContent = 'Удалить';
+    button.onclick = async (event) => {
+      event.preventDefault();
+
+      const gameTitle = game.title;
+
+      await removeGame(games, gameTitle);
+
+      saveGames(games);
+
+      renderGameCards();
+    };
+    note.appendChild(button);
 
     section.appendChild(note);
   }
 }
 
-buttonAddGame.addEventListener('click', async (event) => {
+formGamesManipulation.addEventListener('submit', async (event) => {
   event.preventDefault();
 
   const gameTitle = form.elements['gameTitle'].value;
@@ -47,18 +63,6 @@ buttonAddGame.addEventListener('click', async (event) => {
 
   const game = new Game(gameTitle, [gamePlatform], gameReleaseYear);
   await addGame(games, game);
-
-  saveGames(games);
-
-  renderGameCards();
-});
-
-buttonRemoveGame.addEventListener('click', async (event) => {
-  event.preventDefault();
-
-  const gameTitle = form.elements['gameTitle'].value;
-
-  await removeGame(games, gameTitle);
 
   saveGames(games);
 

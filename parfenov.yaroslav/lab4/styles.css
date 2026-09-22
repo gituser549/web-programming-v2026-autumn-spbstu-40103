@@ -11,6 +11,12 @@ body {
   margin: 0;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 input {
   font-family: Roboto, sans-serif;
   font-size: 16px;
@@ -22,15 +28,14 @@ form {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  gap: 10px;
 }
 
 .buttons {
   display: flex;
   flex-direction: row;
-
   font-family: Roboto, sans-serif;
   font-size: 16px;
-
   gap: 10px;
 }
 
@@ -47,9 +52,9 @@ form {
 
 section {
   display: flex;
+  flex-flow: row wrap;
   align-items: center;
   justify-content: center;
-
   gap: 10px;
 }
 
@@ -57,8 +62,22 @@ article {
   padding: 10px;
   border: 1px solid navy;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 article:hover {
+  background-color: lightgray;
+}
+
+button[data-testid='delete-entity'] {
+  padding: 10px;
+  border: 1px solid navy;
+  border-radius: 10px;
+  background-color: white;
+}
+
+button[data-testid='delete-entity']:hover {
   background-color: lightgray;
 }
