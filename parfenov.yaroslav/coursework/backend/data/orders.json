@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "username": "student",
+    "createdAt": "2026-09-24T12:53:09.323Z",
+    "email": "mail@example.com",
+    "phone": "+79999999999",
+    "delivery": "pickup",
+    "address": "",
+    "payment": "cash",
+    "giftWrap": true,
+    "items": [
+      {
+        "id": 19,
+        "name": "Чехол-подвеска силиконовый с карабином, белый",
+        "price": 1290,
+        "quantity": 1
+      },
+      {
+        "id": 20,
+        "name": "Чехол-подвеска силиконовый с карабином, серый",
+        "price": 1290,
+        "quantity": 1
+      },
+      {
+        "id": 29,
+        "name": "Шлем виртуальной реальности 128GB",
+        "price": 49990,
+        "quantity": 1
+      },
+      {
+        "id": 30,
+        "name": "Умный чемодан-скутер, серый",
+        "price": 89990,
+        "quantity": 1
+      }
+    ],
+    "itemCount": 4,
+    "total": 142560
+  }
+]
