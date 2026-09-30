@@ -1,9 +1,21 @@
+import {Navigate, Route, Routes} from 'react-router-dom';
+import Layout from './components/Layout.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+import HomePage from './pages/HomePage.jsx';
+import LoginPage from './pages/LoginPage.jsx';
+
+function Placeholder({title}) {
+  return <section className="state-page"><h1>{title}</h1><p>Раздел подключен к React Router.</p></section>;
+}
+
 export default function App() {
-  return (
-    <main className="setup-screen">
-      <img src="/assets/logo.svg" alt="Gadget Hub" />
-      <h1>Gadget Hub</h1>
-      <p>React-приложение готово к разработке.</p>
-    </main>
-  );
+  return <Routes>
+    <Route element={<Layout />}>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/catalog" element={<ProtectedRoute><Placeholder title="Каталог" /></ProtectedRoute>} />
+      <Route path="/cart" element={<ProtectedRoute><Placeholder title="Корзина" /></ProtectedRoute>} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Route>
+  </Routes>;
 }
