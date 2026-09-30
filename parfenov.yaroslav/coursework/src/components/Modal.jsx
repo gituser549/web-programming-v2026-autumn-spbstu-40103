@@ -11,10 +11,22 @@ export default function Modal({children, onClose, small = false}) {
     };
   }, [onClose]);
 
-  return <div className="modal-backdrop" onMouseDown={onClose}>
-    <section className={`modal-dialog ${small ? 'small' : ''}`} onMouseDown={(event) => event.stopPropagation()}>
-      <button className="modal-close" type="button" onClick={onClose} aria-label="Закрыть">×</button>
-      {children}
-    </section>
-  </div>;
+  return (
+    <div className="modal-backdrop" onMouseDown={onClose}>
+      <section
+        className={`modal-dialog ${small ? 'small' : ''}`}
+        onMouseDown={(event) => event.stopPropagation()}
+      >
+        <button
+          className="modal-close"
+          type="button"
+          onClick={onClose}
+          aria-label="Закрыть"
+        >
+          ×
+        </button>
+        {children}
+      </section>
+    </div>
+  );
 }

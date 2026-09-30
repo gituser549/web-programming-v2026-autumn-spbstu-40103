@@ -7,16 +7,26 @@ const USER_KEY = 'gadgetHubUser';
 const CART_KEY = 'gadgetHubCart';
 
 function readUser() {
-  try { return JSON.parse(localStorage.getItem(USER_KEY)); } catch { return null; }
+  try {
+    return JSON.parse(localStorage.getItem(USER_KEY));
+  } catch {
+    return null;
+  }
 }
 
 function readCart() {
-  try { return JSON.parse(localStorage.getItem(CART_KEY)) || {}; } catch { return {}; }
+  try {
+    return JSON.parse(localStorage.getItem(CART_KEY)) || {};
+  } catch {
+    return {};
+  }
 }
 
 export function StoreProvider({children}) {
   const [goods, setGoods] = useState([]);
-  const [token, setToken] = useState(() => localStorage.getItem(TOKEN_KEY) || '');
+  const [token, setToken] = useState(
+    () => localStorage.getItem(TOKEN_KEY) || '',
+  );
   const [user, setUser] = useState(readUser);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -51,7 +61,10 @@ export function StoreProvider({children}) {
   }, []);
 
   async function login(credentials) {
-    const result = await api('/login', {method: 'POST', body: JSON.stringify(credentials)});
+    const result = await api('/login', {
+      method: 'POST',
+      body: JSON.stringify(credentials),
+    });
     setToken(result.token);
     setUser(result.user);
     localStorage.setItem(TOKEN_KEY, result.token);
@@ -59,7 +72,11 @@ export function StoreProvider({children}) {
   }
 
   async function logout() {
-    try { await api('/logout', {method: 'POST', token}); } catch { /* локальный выход всё равно выполняется */ }
+    try {
+      await api('/logout', {method: 'POST', token});
+    } catch {
+      /* локальный выход всё равно выполняется */
+    }
     setToken('');
     setUser(null);
     localStorage.removeItem(TOKEN_KEY);
@@ -91,9 +108,30 @@ export function StoreProvider({children}) {
     localStorage.removeItem(CART_KEY);
   }
 
-  const cartCount = Object.values(cart).reduce((sum, quantity) => sum + Number(quantity), 0);
-  const value = useMemo(() => ({goods, token, user, loading, error, login, logout, cart, cartCount, changeQuantity, removeItems, clearCart}), [goods, token, user, loading, error, cart]);
-  return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
+  const cartCount = Object.values(cart).reduce(
+    (sum, quantity) => sum + Number(quantity),
+    0,
+  );
+  const value = useMemo(
+    () => ({
+      goods,
+      token,
+      user,
+      loading,
+      error,
+      login,
+      logout,
+      cart,
+      cartCount,
+      changeQuantity,
+      removeItems,
+      clearCart,
+    }),
+    [goods, token, user, loading, error, cart],
+  );
+  return (
+    <StoreContext.Provider value={value}>{children}</StoreContext.Provider>
+  );
 }
 
 export function useStore() {

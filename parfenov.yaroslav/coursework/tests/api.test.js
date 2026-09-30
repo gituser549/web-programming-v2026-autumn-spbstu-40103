@@ -4,7 +4,10 @@ import path from 'node:path';
 import os from 'node:os';
 import {writeFile, unlink} from 'node:fs/promises';
 
-const ordersFile = path.join(os.tmpdir(), `gadget-hub-orders-${process.pid}.json`);
+const ordersFile = path.join(
+  os.tmpdir(),
+  `gadget-hub-orders-${process.pid}.json`,
+);
 process.env.GADGET_HUB_ORDERS_FILE = ordersFile;
 const {createApp} = await import('../backend/server.js');
 
@@ -47,12 +50,22 @@ test('login rejects incorrect credentials and creates a session', async () => {
 });
 
 test('authorized user creates an order and sees it in history', async () => {
-  const {data: {token}} = await login();
-  const headers = {'Content-Type': 'application/json', Authorization: `Bearer ${token}`};
+  const {
+    data: {token},
+  } = await login();
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+  };
   const createdResponse = await fetch(`${baseUrl}/orders`, {
     method: 'POST',
     headers,
-    body: JSON.stringify({phone: '+7 999 123-45-67', delivery: 'pickup', payment: 'card', items: [{id: 1, quantity: 2}]}),
+    body: JSON.stringify({
+      phone: '+7 999 123-45-67',
+      delivery: 'pickup',
+      payment: 'card',
+      items: [{id: 1, quantity: 2}],
+    }),
   });
   const created = await createdResponse.json();
   assert.equal(createdResponse.status, 201);
