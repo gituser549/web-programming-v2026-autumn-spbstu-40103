@@ -4,9 +4,14 @@ import {api} from '../api.js';
 const StoreContext = createContext(null);
 const TOKEN_KEY = 'gadgetHubToken';
 const USER_KEY = 'gadgetHubUser';
+const CART_KEY = 'gadgetHubCart';
 
 function readUser() {
   try { return JSON.parse(localStorage.getItem(USER_KEY)); } catch { return null; }
+}
+
+function readCart() {
+  try { return JSON.parse(localStorage.getItem(CART_KEY)) || {}; } catch { return {}; }
 }
 
 export function StoreProvider({children}) {
@@ -15,6 +20,7 @@ export function StoreProvider({children}) {
   const [user, setUser] = useState(readUser);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [cart, setCart] = useState(readCart);
 
   useEffect(() => {
     async function load() {
@@ -60,7 +66,33 @@ export function StoreProvider({children}) {
     localStorage.removeItem(USER_KEY);
   }
 
-  const value = useMemo(() => ({goods, token, user, loading, error, login, logout}), [goods, token, user, loading, error]);
+  function changeQuantity(goodId, difference) {
+    setCart((current) => {
+      const next = {...current};
+      const quantity = Number(next[goodId] || 0) + difference;
+      if (quantity > 0) next[goodId] = quantity;
+      else delete next[goodId];
+      localStorage.setItem(CART_KEY, JSON.stringify(next));
+      return next;
+    });
+  }
+
+  function removeItems(ids) {
+    setCart((current) => {
+      const next = {...current};
+      ids.forEach((id) => delete next[id]);
+      localStorage.setItem(CART_KEY, JSON.stringify(next));
+      return next;
+    });
+  }
+
+  function clearCart() {
+    setCart({});
+    localStorage.removeItem(CART_KEY);
+  }
+
+  const cartCount = Object.values(cart).reduce((sum, quantity) => sum + Number(quantity), 0);
+  const value = useMemo(() => ({goods, token, user, loading, error, login, logout, cart, cartCount, changeQuantity, removeItems, clearCart}), [goods, token, user, loading, error, cart]);
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
 }
 

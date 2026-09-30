@@ -6,7 +6,7 @@ function navClass({isActive}) {
 }
 
 export default function Layout() {
-  const {user, logout} = useStore();
+  const {user, logout, cartCount} = useStore();
   const navigate = useNavigate();
 
   async function handleLogout() {
@@ -22,7 +22,7 @@ export default function Layout() {
           <nav className="main-nav" aria-label="Основная навигация">
             <NavLink className={navClass} to="/catalog"><img className="nav-icon" src="/assets/icons/catalog.svg" alt="" />Каталог</NavLink>
             {user ? <>
-              <NavLink className={navClass} to="/cart"><img className="nav-icon" src="/assets/icons/card.svg" alt="" />Корзина</NavLink>
+              <NavLink className={navClass} to="/cart"><img className="nav-icon" src="/assets/icons/card.svg" alt="" />Корзина{cartCount > 0 && <span className="cart-badge">{cartCount}</span>}</NavLink>
               <span className="user-name">{user.name}</span>
               <button className="nav-link nav-button" type="button" onClick={handleLogout}><img className="nav-icon" src="/assets/icons/profile.svg" alt="" />Выйти</button>
             </> : <NavLink className={navClass} to="/login"><img className="nav-icon" src="/assets/icons/profile.svg" alt="" />Войти</NavLink>}
